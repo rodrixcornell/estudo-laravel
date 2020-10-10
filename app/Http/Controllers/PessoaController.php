@@ -14,7 +14,8 @@ class PessoaController extends Controller
      */
     public function index()
     {
-        return view('pessoas.index');
+        $data = Pessoa::paginate();
+        return view('pessoas.index', compact('data'));
     }
 
     /**
@@ -54,7 +55,7 @@ class PessoaController extends Controller
         $data->email = $request->email;
 
         $data->save();
-        
+
         return redirect()->route('pessoas.index');
     }
 

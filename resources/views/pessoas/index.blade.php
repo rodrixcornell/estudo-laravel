@@ -7,8 +7,15 @@
     <title>Pessoas</title>
 </head>
 <body>
+
+    <a href="{{ route('pessoas.create') }}">Novo Cadastro</a>
+    <br><hr>
+
     <h1>Pessoas Cadastradas</h1>
+
+    @foreach ($data as $item)
+        {{ $item->id }}, {{ $item->nome }}, {{ $item->telefone }}, {{ $item->email }}
+    @endforeach
     
-<a href="{{ route('pessoas.create') }}">Novo Cadastro</a>
 </body>
 </html>
