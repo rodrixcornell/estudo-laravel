@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Pessoas</title>
+    <title>Formulário de Pessoa</title>
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
@@ -13,42 +13,33 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
 </head>
 <body>
+    <h1>Formulário de Pessoa #{{ $data->id ?? ''}}</h1>
 
-    <a href="{{ route('pessoas.create') }}">Novo Cadastro</a>
-    <br><hr>
+    @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
 
-    <h1>Pessoas Cadastradas</h1>
+    <h2>Deseja mesmo excluirPessoa: {{ $data->nome ?? ''}}</h2>
 
-    <table class="table">
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Nome</th>
-            <th scope="col">Email</th>
-            <th scope="col">Telefone</th>
-            <th scope="col" class="text-right">Ações</th>
-          </tr>
-        </thead>
-        <tbody>
+    @if ($delete)
+	<form class="form-inline" action="{{ route('pessoas.destroy', $data->id) }}" method="post">
+        @method('delete')
+        @csrf
 
-        @foreach ($data as $item)
-          <tr>
-            <th scope="row">{{ $item->id }}</th>
-            <td>{{ $item->nome }}</td>
-            <td>{{ $item->email }}</td>
-            <td>{{ $item->telefone }}</td>
-            <td class="text-right">
-                <a href="{{ route('pessoas.show',$item->id) }}" type="button" class="btn btn-info my-1 mr-sm-1">Show</a>
-                <a href="{{ route('pessoas.edit',$item->id) }}" type="button" class="btn btn-warning my-1 mr-sm-1">Edit</a>
-                <a href="{{ route('pessoas.show',[$item->id,'delete='.$item->id]) }}" type="button" class="btn btn-danger my-1 mr-sm-1">Delete</a>
-            </td>
-          </tr>
-          @endforeach
-
-        </tbody>
-    </table>
-
-    {{ $data->links() }}
+        <br>
+        &nbsp;<input type="submit" class="btn btn-danger mb-2" value="Excluir">
+        &nbsp;<a href="{{ route('pessoas.index') }}" type="button" class="btn btn-secondary mb-2">Cancelar</a>
+    </form>
+    @else
+        &nbsp;<a href="{{ route('pessoas.edit', $data->id) }}" type="button" class="btn btn-warning mb-2">Editar</a>
+        &nbsp;<a href="{{ route('pessoas.index') }}" type="button" class="btn btn-secondary mb-2">Cancelar</a>
+    @endif
 
     <!-- Option 2: jQuery, Popper.js, and Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>

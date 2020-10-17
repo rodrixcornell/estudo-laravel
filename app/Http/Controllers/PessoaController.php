@@ -25,7 +25,7 @@ class PessoaController extends Controller
      */
     public function create()
     {
-        return view('pessoas.create');
+        return view('pessoas.form');
     }
 
     /**
@@ -62,12 +62,18 @@ class PessoaController extends Controller
     /**
      * Display the specified resource.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
-        //
+        $pessoa = new Pessoa();
+        $data = $pessoa->findOrFail($id);
+
+        $delete = ($request->delete ?? false);
+        return view('pessoas.show', compact('data', 'delete'));
+
     }
 
     /**
@@ -78,7 +84,10 @@ class PessoaController extends Controller
      */
     public function edit($id)
     {
-        //
+        $pessoa = new Pessoa();
+        $data = $pessoa->findOrFail($id);
+
+        return view('pessoas.form', compact('data'));
     }
 
     /**
@@ -90,7 +99,28 @@ class PessoaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // dd($request->all());
+
+        $validator = \Validator::make($request->all(), [
+            'nome' => 'required|max:100',
+            'telefone' => 'required|max:20',
+            'email' => 'required|string|email|max:100|unique:pessoas,email,' . $id,
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->route('pessoas.edit', $id)->withErrors($validator)->withInput();
+        }
+
+		$data = Pessoa::findOrFail($id);
+
+        $data->nome = $request->nome;
+        $data->telefone = $request->telefone;
+        $data->email = $request->email;
+
+        $data->save();
+        // $data->update($id);
+
+        return redirect()->route('pessoas.index');
     }
 
     /**
