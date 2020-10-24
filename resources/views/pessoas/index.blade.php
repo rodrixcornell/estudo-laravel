@@ -15,6 +15,9 @@
             <th scope="col">Nome</th>
             <th scope="col">Email</th>
             <th scope="col">Telefone</th>
+            <th scope="col">CPF</th>
+            <th scope="col">Criado</th>
+            <th scope="col">Atualizado</th>
             <th scope="col" class="text-right">Ações</th>
           </tr>
         </thead>
@@ -26,6 +29,9 @@
             <td>{{ $item->nome }}</td>
             <td>{{ $item->email }}</td>
             <td>{{ $item->telefone }}</td>
+            <td>{{ $item->cpf }}</td>
+            <td>{{ $item->created_at }}</td>
+            <td>{{ $item->updated_at }}</td>
             <td class="text-right">
                 <a href="{{ route('pessoas.show',$item->id) }}" type="button" class="btn btn-info my-1 mr-sm-1">Show</a>
                 <a href="{{ route('pessoas.edit',$item->id) }}" type="button" class="btn btn-warning my-1 mr-sm-1">Edit</a>

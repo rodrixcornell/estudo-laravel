@@ -30,6 +30,7 @@
         @error('nome')
             &nbsp;<div class="alert alert-danger">{{ $message }}</div>
         @enderror
+
         <div class="form-group mb-2">
             &nbsp;<label for="telefone">Telefone</label>
             &nbsp;<input type="tel" class="form-control" name="telefone" id="telefone" value="{{ $data->telefone ?? '' }}" placeholder="Telefone">
@@ -37,11 +38,20 @@
         @error('telefone')
             &nbsp;<div class="alert alert-danger">{{ $message }}</div>
         @enderror
+
         <div class="form-group mb-2">
             &nbsp;<label for="email">Email</label>
             &nbsp;<input type="email" class="form-control" name="email" id="email" value="{{ $data->email ?? '' }}" placeholder="Email">
         </div>
         @error('email')
+            <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
+
+        <div class="form-group mb-2">
+            &nbsp;<label for="cpf">CPF</label>
+            &nbsp;<input type="text" class="form-control" name="cpf" id="cpf" value="{{ $data->cpf ?? '' }}" placeholder="CPF">
+        </div>
+        @error('cpf')
             <div class="alert alert-danger">{{ $message }}</div>
         @enderror
 

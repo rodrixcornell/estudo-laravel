@@ -17,4 +17,12 @@ Route::get('/', function () {
     return view('welcome');
 })->name('home');
 
-Route::resource('pessoas', 'PessoaController');
+Route::group([
+    'middleware' => 'auth',
+], function () {
+    Route::resource('pessoas', 'PessoaController');    
+});
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

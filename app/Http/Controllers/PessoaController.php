@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Pessoa;
 use Illuminate\Http\Request;
+use App\Http\Requests\StorePessoaPost;
 
 class PessoaController extends Controller
 {
@@ -31,22 +32,26 @@ class PessoaController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \App\Http\Requests\StorePessoaPost $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StorePessoaPost $request)
     {
         // dd($request->all());
 
-        $validator = \Validator::make($request->all(), [
-            'nome' => 'required|max:100',
-            'telefone' => 'required|max:20',
-            // 'email' => 'required|max:100|email|unique:pessoas',
-            'email' => 'max:100|email|unique:pessoas',
-        ]);
+        // $validator = \Validator::make($request->all(), [
+        //     'nome' => 'required|max:100',
+        //     'telefone' => 'required|max:20',
+        //     // 'email' => 'required|max:100|email|unique:pessoas',
+        //     'email' => 'max:100|email|unique:pessoas',
+        // ]);
 
-        if ($validator->fails()) {
-            return redirect()->route('pessoas.create')->withErrors($validator)->withInput();
+        $validated = $request->validated();
+
+        // dd($validated);
+        // if ($validator->fails()) {
+        if (!$validated) {
+            return redirect()->route('pessoas.create')->withErrors($validated)->withInput();
         }
 
         $data = new Pessoa();
@@ -54,6 +59,7 @@ class PessoaController extends Controller
         $data->nome = $request->nome;
         $data->telefone = $request->telefone;
         $data->email = $request->email;
+        $data->cpf = $request->cpf;
 
         $data->save();
 
