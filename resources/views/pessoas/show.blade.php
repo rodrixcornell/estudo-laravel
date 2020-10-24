@@ -22,8 +22,8 @@
     @endif
 
     @if ($delete)
-	<form class="form-inline" action="{{ route('pessoas.destroy', $data->id) }}" method="post">
-        @method('delete')
+	<form class="form-inline" action="{{ route('pessoas.destroy', $data->id) }}" method="POST">
+        @method('DELETE')
         @csrf
 
         <br>

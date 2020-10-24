@@ -1,6 +1,6 @@
 @extends('templates.base')
 
-@section('title', 'Formulário de Pessoa #' . $data->id ?? '')
+@section('title', 'Formulário de Pessoa')
 
 @section('content')
     <h1>Formulário de Pessoa #{{ $data->id ?? ''}}</h1>
@@ -16,10 +16,10 @@
     @endif
 
     @if (!isset($data))
-        <form class="form-inline" action="{{ route('pessoas.create') }}" method="post">
+        <form class="form-inline" action="{{ route('pessoas.store') }}" method="POST">
     @else
-        <form class="form-inline" action="{{ route('pessoas.update', $data->id) }}" method="post">
-        @method('put')
+        <form class="form-inline" action="{{ route('pessoas.update', $data->id) }}" method="POST">
+        @method('PUT')
     @endif
         @csrf
 

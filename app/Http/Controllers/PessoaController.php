@@ -41,7 +41,8 @@ class PessoaController extends Controller
         $validator = \Validator::make($request->all(), [
             'nome' => 'required|max:100',
             'telefone' => 'required|max:20',
-            'email' => 'required|max:100|email|unique:pessoas',
+            // 'email' => 'required|max:100|email|unique:pessoas',
+            'email' => 'max:100|email|unique:pessoas',
         ]);
 
         if ($validator->fails()) {
