@@ -131,6 +131,10 @@ class PessoaController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $data = Pessoa::findOrFail($id);
+
+        $data->delete();
+
+        return redirect()->route('pessoas.index');   
     }
 }
