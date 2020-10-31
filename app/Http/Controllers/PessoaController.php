@@ -50,14 +50,14 @@ class PessoaController extends Controller
         //     // 'email' => 'required|max:100|email|unique:pessoas',
         //     'email' => 'max:100|email|unique:pessoas',
         // ]);
-
-        $validated = $request->validated();
+        
+        // $validated = $request->validated();
 
         // dd($validated);
         // if ($validator->fails()) {
-        if (!$validated) {
-            return redirect()->route('pessoas.create')->withErrors($validated)->withInput();
-        }
+        // if (!$validated) {
+        //     return redirect()->route('pessoas.create')->withErrors($validated)->withInput();
+        // }
 
         // $data = new Pessoa();
 

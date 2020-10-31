@@ -25,7 +25,7 @@
 
         <div class="form-group mb-2">
             &nbsp;<label for="nome">Nome</label>
-            &nbsp;<input type="text" class="form-control" name="nome" id="nome" value="{{ $data->nome ?? '' }}" placeholder="Nome">
+            &nbsp;<input type="text" class="form-control" name="nome" id="nome" value="{{ old('nome') ?? '' }}" placeholder="Nome">
         </div>
         @error('nome')
             &nbsp;<div class="alert alert-danger">{{ $message }}</div>
