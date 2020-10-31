@@ -14,8 +14,8 @@ class AddCpfToPessoasTable extends Migration
     public function up()
     {
         Schema::table('pessoas', function (Blueprint $table) {
-            // $table->string('cpf', 11)->unique();
-            $table->string('cpf', 11)->nullable()->change();
+            $table->string('cpf', 11)->unique();
+            // $table->string('cpf', 11)->nullable()->change();
         });
     }
 
